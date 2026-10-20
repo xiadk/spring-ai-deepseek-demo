@@ -1,0 +1,26 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: spring-ai-deepseek-demo
+  ai:
+    # DeepSeek 连接配置（starter: spring-ai-starter-model-deepseek）
+    # API Key 通过环境变量 DEEPSEEK_API_KEY 注入，避免硬编码
+    deepseek:
+      # 通过环境变量 CHATANYWHERE_API_KEY 注入（见 .env / start.bat），避免密钥进 git
+      api-key: sk-wcgE5SScItys65Ikbt7yiq8NotzzdQmnIH4v93rGPZGl0c69
+      # 指向 ChatAnywhere 的 OpenAI 兼容端点（base-url + /chat/completions）
+      base-url: https://api.chatanywhere.tech/v1
+      chat:
+        # 模型名改为 ChatAnywhere 提供的 DeepSeek 模型
+        options:
+          model: deepseek-v4-flash
+          temperature: 0.7
+          max-tokens: 1024
+
+# 日志：打印请求/响应摘要，便于观察流式与记忆行为
+logging:
+  level:
+    org.springframework.ai.chat.client: DEBUG
+    com.example.ai: INFO
